@@ -1,0 +1,34 @@
+name: Auto-Approve and Merge Exercism PRs
+on:
+  pull_request:
+    types: [opened, reopened, synchronized]
+jobs:
+  auto-merge:
+    if: github.actor == 'Exercism Solutions Syncer'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: Approve and Merge
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            await github.rest.pulls.createReview({
+              owner,
+              repo,
+              pull_number: prNumber,
+              event: 'APPROVE'
+            });
+
+            await github.rest.pulls.merge({
+              owner,
+              repo,
+              pull_number: prNumber,
+              merge_method: 'merge'
+            });
