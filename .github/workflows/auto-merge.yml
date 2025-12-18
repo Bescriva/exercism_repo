@@ -3,6 +3,15 @@ on:
   pull_request:
     types: [opened, reopened, synchronized]
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Event Context
+        run: |
+          echo "### EVENT PAYLOAD ###"
+          echo '${{ toJson(github.event) }}' | jq .
+          echo "### GITHUB CONTEXT ###"
+          echo '${{ toJson(github) }}' | jq .
   auto-merge:
     if: github.actor == 'Exercism Solutions Syncer'
     runs-on: ubuntu-latest
