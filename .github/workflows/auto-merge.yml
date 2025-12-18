@@ -2,15 +2,25 @@ name: Auto-Approve and Merge Exercism PRs
 on:
   pull_request:
     types: [opened, reopened, synchronized]
+
 jobs:
   auto-merge:
-    if: github.actor == 'Exercism Solutions Syncer'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: write
 
     steps:
+      - name: Debug App Information
+        run: |
+          echo "Triggering Actor: ${{ github.actor }}"
+          echo "Triggering Actor ID: ${{ github.actor_id }}"
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Full github context:"
+          echo '${{ toJson(github) }}'
+          echo "Full event payload:"
+          echo '${{ toJson(github.event) }}'
+
       - name: Approve and Merge
         uses: actions/github-script@v7
         with:
