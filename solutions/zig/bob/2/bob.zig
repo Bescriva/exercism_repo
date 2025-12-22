@@ -1,4 +1,5 @@
-fn is_question(s: []const u8) bool {
+
+fn isQuestion(s: []const u8) bool {
     for (0..s.len) |i| {
         const char = s[s.len - 1 - i];
 
@@ -14,7 +15,7 @@ fn is_question(s: []const u8) bool {
     return (false);
 }
 
-fn is_yelling(s: []const u8) bool {
+fn isYelling(s: []const u8) bool {
     var has_letter: bool = false;
 
     for (s) |char| {
@@ -26,7 +27,7 @@ fn is_yelling(s: []const u8) bool {
     return (has_letter);
 }
 
-fn is_nothing(s: []const u8) bool {
+fn isNothing(s: []const u8) bool {
     if (s.len == 0)
         return (true);
 
@@ -37,9 +38,9 @@ fn is_nothing(s: []const u8) bool {
 }
 
 pub fn response(s: []const u8) []const u8 {
-    return if (is_nothing(s)) "Fine. Be that way!"
-            else if (is_question(s) and is_yelling(s)) "Calm down, I know what I'm doing!"
-            else if (is_yelling(s)) "Whoa, chill out!"
-            else if (is_question(s)) "Sure."
+    return if (isNothing(s)) "Fine. Be that way!"
+            else if (isQuestion(s) and isYelling(s)) "Calm down, I know what I'm doing!"
+            else if (isYelling(s)) "Whoa, chill out!"
+            else if (isQuestion(s)) "Sure."
             else "Whatever.";
 }
