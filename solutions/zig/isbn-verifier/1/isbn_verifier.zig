@@ -5,7 +5,7 @@ pub fn isValidIsbn10(s: []const u8) bool {
     var sum: usize = 0;
 
     for (s) |char| {
-        if (char == '-' or char == ' ')
+        if (char == '-')
             continue;
         if (count < 9) {
             if (!std.ascii.isDigit(char))
