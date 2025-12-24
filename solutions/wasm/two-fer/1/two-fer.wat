@@ -1,6 +1,5 @@
 (module
   (memory (export "mem") 1)
-  
   (data (i32.const 0) "One for ")
   (data (i32.const 8) "you")
   (data (i32.const 11) ", one for me.")
