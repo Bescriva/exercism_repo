@@ -2,10 +2,10 @@ const std = @import("std");
 const mem = std.mem;
 
 const dict = std.StaticStringMap(u8).initComptime(.{
-    .{ "G", 'C' },
-    .{ "C", 'G' },
-    .{ "T", 'A' },
-    .{ "A", 'U' },
+    .{"G", 'C'},
+    .{"C", 'G'},
+    .{"T", 'A'},
+    .{"A", 'U'},
 });
 
 pub fn toRna(allocator: mem.Allocator, dna: []const u8) mem.Allocator.Error![]const u8 {
