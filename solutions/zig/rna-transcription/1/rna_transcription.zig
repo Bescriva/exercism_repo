@@ -13,8 +13,9 @@ pub fn toRna(allocator: mem.Allocator, dna: []const u8) mem.Allocator.Error![]co
     errdefer list.deinit(allocator);
 
     for (dna) |n| {
-        const rna_char = dict.get(&[_]u8{n}) orelse unreachable;
+        const rna_char = dict.get(&.{n}) orelse unreachable;
         try list.append(allocator, rna_char);
     }
+
     return list.toOwnedSlice(allocator);
 }
