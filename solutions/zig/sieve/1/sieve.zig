@@ -12,9 +12,8 @@ pub fn primes(buffer: []u32, limit: u12) []u32 {
         
         var multiple = n * 2;
         
-        while (multiple <= limit) : (multiple += n) {
+        while (multiple <= limit) : (multiple += n)
             is_composite[multiple] = true;
-        }
     }
 
     return buffer[0..i];
